@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejemplo de Ajax con JSON</title>
+</head>
+
+<body>
+    <button onclick="ajax_json()">Ver producto</button>
+    <div id="info"></div>
+
+    <script>
+
+        var resultado = document.getElementById("info");
+
+        function ajax_json(){
+
+            var xmr;
+
+            if (window.XMLHttpRequest) {
+
+                xmr = new XMLHttpRequest();
+
+            } 
+            
+            else {
+
+                xmr = new ActiveXObject("Microsoft.XMLHTTP");
+
+            }
+
+            xmr.onreadystatechange = function(){
+
+                if (xmr.readyState === 4 && xmr.status === 200) {
+                
+                    var datos = JSON.parse(xmr.responseText);
+                    
+                    if(resultado.innerHTML === ""){
+
+                        for (var i in datos){
+
+                            resultado.innerHTML += i + ":" + datos[i] + "<br/>";
+                        }
+                        
+                    }
+
+                }
+
+            }
+
+        xmr.open("GET" , "datos.json", true);
+        xmr.send();    
+
+    }
+
+</script>
+
+</body>
+
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   
+    <title>Document</title>
+
+</head>
+<body>
+    <input type="button" style="margin-left: 20px;" id="button1"
+    onclick="cargarajax()"value="Peticion">
+
+    <div style="background-color: rgb(85, 2, 110);color:rgb(199, 228, 190);
+    width: 200px;margin-top: 20px;margin-left: 20px;"
+     id="miDiv">mensaje desde funcion.html</div>
+
+     <div style="width:200px; margin-top: 20px; margin-left: 20px;"
+     id="respuesta"></div>
+
+
+     <script>
+        function cargarajax(){
+            var conexion1 = new XMLHttpRequest();
+            conexion1.open('GET', 'funcion.html',true);
+            conexion1.onreadystatechange=mostrarRespuesta;
+            conexion1.send();
+        function mostrarRespuesta()
+        {
+            var respuesta=document.getElementById('respuesta');
+            if(conexion1.readyState==4){
+                console.log("Estado cambio: "+conexion1.readyState);
+                respuesta.innerHTML=conexion1.responseText;
+            }
+            else{
+                respuesta.innerHTML='Espere por favor';
+            }
+        }
+    }
+
+    </script>
+</body>
+</html>

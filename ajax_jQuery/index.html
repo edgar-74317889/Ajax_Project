@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="main.js"></script>
+    <script src="jquery.min.js"></script>
+</head>
+
+<body>
+
+    <div class="container">
+        <button type="button" id="boton">Cargar contenido</button>
+        <div class="contanier" id="contenido"></div>
+    </div>
+
+    <script>
+        $(document).ready(function () {
+
+            $('#boton').click(function () {
+
+                var esperar = 1000;
+                $.ajax({
+
+                    url: "prueba.html",
+                    beforeSend: function () {
+                        $('#contenido').text('Loading... Wait please!');
+                    },
+
+                    success: function (data) {
+                        setTimeout(function () {
+                            $('#contenido').html(data);
+                        }, esperar
+                        );
+                    }
+
+                });
+
+            });
+        });
+    </script>
+
+</body>
+
+</html>
